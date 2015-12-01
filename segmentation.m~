@@ -1,0 +1,14 @@
+%Cargo las imagenes
+myDir = 'C:/Users/Marcos/Desktop/TESIS/DB/DRIVE/DRIVE/test/images/';
+ext_img = '*.tif';
+a = dir([myDir ext_img]);
+nfile = max(size(a)) ;  % number of image files
+for i=1:nfile
+  my_img(i).img = imread([myDir a(i).name]);
+  imshow(my_img(i).img);
+end
+image=imread('/home/valeria/Documentos/TESIS/DataBase/DRIVE/training/images/21_training.tif');
+
+
+imshow(image);
+
