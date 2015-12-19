@@ -33,7 +33,7 @@ imshow(image);
     JO=adapthisteq(sin_fondo); %CLAHE a sinfondo
 
 %% Coherence de la imagen con CLAHE
-   JOC = CoherenceFilter(JO,struct('T',75,'rho',3,'Scheme','O', 'eigenmode', '3'));
+   JOC = CoherenceFilter(JO,struct('T',105,'rho',1,'Scheme','O', 'eigenmode', '3'));
    figure
    subplot(1,1,1), imshow(JOC), title('Optimizado con ruido');
    
@@ -43,8 +43,8 @@ I = im2double(imread('DataSet/DRIVE/training/1st_manual/21_manual1.gif'));
 I = I-0.5;
 
 figure,
-vl_roc(I,JOC);
+% vl_roc(I,JOC);
 [TPR,TNR,info]=vl_roc(I,JOC);
 plot(1-TNR,TPR);
-title(fprintf('%f, %f, %f', info.auc, ))
+title(sprintf('AUC: %f, Error: %f', info.auc, info.eer));
 
