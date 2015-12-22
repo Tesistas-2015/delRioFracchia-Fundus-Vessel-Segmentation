@@ -29,9 +29,10 @@ for i=1:1%size_my_img
     I=im2double(img);
     im=I(:,:,2); % Canal verde
     figure(i);
+    img =adapthisteq(im);
     for f=1:size_a_fondo
-        img_sin_fondo = sacar_fondo(a_fondo(f).met,im);
-        img_sin_fondo =adapthisteq(img_sin_fondo);
+        img_sin_fondo = sacar_fondo(a_fondo(f).met,img);
+        
         for r=1:size_a_ruido
             img_sin_ruido = sacar_ruido(a_ruido(r).met,img_sin_fondo);
             GT= my_imgGT(i).img;
@@ -43,9 +44,9 @@ for i=1:1%size_my_img
             if r==1
                 auc1=info.auc;
             end
-            legend(strcat('mediana-clahe-coherence','_auc: ',num2str(auc1)), strcat('mediana-clahe-anisotropic','_auc: ',num2str(info.auc)),...
-                strcat('media-clahecoherence','_auc: ',num2str(info.auc)), strcat('media-clahe-anisotropic','_auc: ',num2str(info.auc)),...
-                strcat('gaussiano-clahe-coherence','_auc: ',num2str(info.auc)), strcat('gaussiano-clahe-anisotropica','_auc: ',num2str(info.auc)));
+            legend(strcat('clahe-mediana-coherence','_auc: ',num2str(auc1)), strcat('clahe-mediana-anisotropic','_auc: ',num2str(info.auc)),...
+                strcat('clahe-media-coherence','_auc: ',num2str(info.auc)), strcat('clahe-media-anisotropic','_auc: ',num2str(info.auc)),...
+                strcat('clahe-gaussiano-coherence','_auc: ',num2str(info.auc)), strcat('clahe-gaussiano-anisotropica','_auc: ',num2str(info.auc)));
         end
     end
     hold off
